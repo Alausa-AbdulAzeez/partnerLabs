@@ -1,0 +1,70 @@
+.dashboardCardWrapper {
+  min-width: 256px;
+  // height: auto;
+  max-height: 128px;
+  box-shadow: 1px 1px 4px 4px #d2d1d117;
+  padding: 10px;
+  border-radius: 10px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+
+  .imgWrapper {
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    .candidateSearch {
+      height: 100%;
+      // scale: 0.5;
+      // background-color: red;
+      margin: 0;
+    }
+
+    & > h1 {
+      display: flex;
+      align-items: center;
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 27px;
+    }
+  }
+
+  & > p {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    z-index: 10;
+    // line-height: 18px;
+
+    color: var(--text-silver-color);
+    margin-top: 0px;
+  }
+
+  .cardBottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    .cardBottomText {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      text-decoration-line: underline;
+      color: var(--text-silver-color);
+    }
+    .icon {
+      font-size: 30px;
+      padding: 6px;
+      border-radius: 5px;
+    }
+  }
+}

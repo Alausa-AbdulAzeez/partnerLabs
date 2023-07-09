@@ -1,0 +1,32 @@
+.viewClientsWrapper {
+  width: 100%;
+  display: flex;
+
+  .viewClientsRight {
+    flex: 5;
+
+    .viewClientsMainWrapper {
+      padding: 30px 64px;
+
+      .viewClientsMainTopForm {
+        display: flex;
+
+        .companySelect {
+          width: 300px;
+          max-width: 400px;
+        }
+      }
+      .viewClientsMainBottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 400px;
+
+        & > h3 {
+          color: rgb(114, 114, 114);
+        }
+      }
+    }
+  }
+}

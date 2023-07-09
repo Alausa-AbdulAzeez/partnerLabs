@@ -1,0 +1,17 @@
+.page {
+  page-break-after: always;
+  padding: 20px;
+}
+
+.header {
+  margin: 0;
+}
+
+.footer {
+  margin-top: 20px;
+  /* Additional styles for footer appearance */
+}
+
+.add-page-button {
+  margin-top: 20px;
+}

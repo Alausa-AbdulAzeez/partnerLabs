@@ -1,0 +1,22 @@
+.homeWrapper {
+  display: flex;
+
+  .homepageRight {
+    flex: 5;
+    overflow: auto;
+
+    .homeMainWrapper {
+      padding: 30px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: calc(100% - 50px);
+      .homeMainTop {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        height: 160px;
+      }
+    }
+  }
+}

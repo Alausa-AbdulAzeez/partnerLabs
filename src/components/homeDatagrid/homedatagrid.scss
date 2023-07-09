@@ -1,0 +1,25 @@
+.homeDatagridWraper {
+  h3 {
+    margin-bottom: 5px;
+  }
+}
+
+.homeNotAttendedToo {
+  background-color: rgba(186, 60, 60, 0.12);
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: rgba(94, 30, 30, 1);
+}
+.homeAuthorized,
+.homeAttendedTo {
+  background-color: rgba(156, 220, 155, 1);
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: rgba(2, 101, 0, 1);
+}
+.homeNotAuthorized {
+  background-color: rgba(207, 221, 255, 1);
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: rgba(57, 112, 255, 1);
+}

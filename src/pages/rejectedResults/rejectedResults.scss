@@ -1,0 +1,53 @@
+.rejectedResultsWrapper {
+  width: 100%;
+  display: flex;
+
+  .rejectedResultsRight {
+    flex: 5;
+
+    .rejectedResultsMainWrapper {
+      padding: 30px 64px;
+
+      .rejectedResultsMainTopForm {
+        display: flex;
+
+        .companySelect {
+          width: 300px;
+          max-width: 400px;
+        }
+
+        .candidateName {
+          width: 500px;
+          max-width: 600px;
+          // margin: 0 50px;
+        }
+
+        .rejectedResultsBtn {
+          width: 80px;
+          background-color: rgba(100, 57, 255, 1);
+          padding: 6px 12px;
+          display: flex;
+          align-items: center;
+          color: white;
+          border-radius: 10px;
+          justify-content: center;
+          cursor: pointer;
+        }
+      }
+      .rejectedResultsMainBottom {
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .searchImg {
+          height: 380px;
+        }
+
+        & > h3 {
+          color: rgb(114, 114, 114);
+        }
+      }
+    }
+  }
+}
