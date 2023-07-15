@@ -94,6 +94,14 @@
         cursor: pointer;
         color: rgba(57, 112, 255, 1);
         background-color: rgba(207, 221, 255, 1);
+        border: none;
+        outline: none;
+
+        &:disabled{
+          cursor: not-allowed;
+          background-color: rgba(207, 221, 255, 0.336);
+
+        }
         // margin-left: auto;
       }
       .sendDetails {

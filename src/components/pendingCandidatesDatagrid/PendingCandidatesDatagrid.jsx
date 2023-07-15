@@ -71,6 +71,21 @@ const PendingCandidatesDatagrid = (props) => {
   const [selectedCandidate, setSelecedCandidate] = useState({});
 
   // USER DETAILS
+
+  const [urinalysisDetails, setUrinalysisDetails] = useState({
+    "Color/Appearance": "",
+    Leucocytes: "",
+    Nitrites: "",
+    Urobilinogen: "",
+    Protein: "",
+    pH: "",
+    Blood: "",
+    SpecificGravity: "",
+    Ketone: "",
+    Bilirubin: "",
+    Glucose: "",
+  });
+
   const [userDetails, setUserDetails] = useState({
     candidateId: "",
     clientid: "",
@@ -80,8 +95,12 @@ const PendingCandidatesDatagrid = (props) => {
     age: "",
     bmi: "",
     gender: "",
-    // temperature: "",
+    temperature: "",
     state: "",
+    visaulAcuity: "",
+    randomBloodSugar: "",
+    stoolAnalysis: "",
+    urinalysis: JSON.stringify(urinalysisDetails),
   });
 
   // TABLE ROWS PER PAGE
@@ -111,6 +130,9 @@ const PendingCandidatesDatagrid = (props) => {
 
   // LOGOUT BACKDROP
   const [open, setOpen] = React.useState(false);
+
+  // TO SET THE STATE OF THE UPDATE BUTTON
+  const [disableLeftBtn, setDisableLeftBtn] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -317,28 +339,29 @@ const PendingCandidatesDatagrid = (props) => {
     toastId.current = toast("Please wait...", {
       isLoading: true,
     });
+    setDisableLeftBtn(true);
 
-    const keys = [
-      "height",
-      "bloodPressure",
-      "weight",
-      "age",
-      "gender",
-      "temperature",
-    ];
+    console.log(userDetails);
 
     try {
-      const found = keys?.find((key) => {
-        return userDetails[key] === "";
-      });
-
-      if (!found) {
-        await publicRequest
-          .put(
-            `/Candidate/UInfo?Candidateid=${Number(
-              candidateId
-            )}&Clientid=${Number(clientId)}`,
-            userDetails,
+      await publicRequest
+        .put(
+          `/Candidate/UInfo?Candidateid=${Number(
+            candidateId
+          )}&Clientid=${Number(clientId)}`,
+          userDetails,
+          {
+            headers: {
+              Accept: "*",
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(async () => {
+          await publicRequest.put(
+            `Candidate/Authorize/${candidateId}`,
+            {},
             {
               headers: {
                 Accept: "*",
@@ -346,37 +369,24 @@ const PendingCandidatesDatagrid = (props) => {
                 "Content-Type": "application/json",
               },
             }
-          )
-          .then(async () => {
-            await publicRequest.put(
-              `Candidate/Authorize/${candidateId}`,
-              {},
-              {
-                headers: {
-                  Accept: "*",
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-          })
-          .then(async () => {
-            await props?.getPendingCandidates();
-            // window.location.reload();
-          })
-          // .then(() => props?.setReloadTable((prev) => !prev))
-          .then(() => {
-            toast.update(toastId.current, {
-              render: "Candidate can proceed to the next stage",
-              type: "success",
-              isLoading: false,
-              autoClose: 2500,
-            });
+          );
+          setDisableLeftBtn(false);
+        })
+        .then(async () => {
+          await props?.getPendingCandidates().then(() => {
+            setPosition("-100%");
           });
-      } else {
-        console.log(found);
-        throw Error(`Please fill all fields, the "${found}" field is empty`);
-      }
+          // window.location.reload();
+        })
+        // .then(() => props?.setReloadTable((prev) => !prev))
+        .then(() => {
+          toast.update(toastId.current, {
+            render: "Candidate can proceed to the next stage",
+            type: "success",
+            isLoading: false,
+            autoClose: 2500,
+          });
+        });
     } catch (error) {
       console.log(error);
       console.log(error.message);
@@ -391,6 +401,7 @@ const PendingCandidatesDatagrid = (props) => {
           "Something went wrong, please try again"
         }`,
       });
+      setDisableLeftBtn(false);
     }
   };
   // END OF FUNCTION TO SEND UPDATED USER DETAILS TO THE BACKEND (PHLEB)
@@ -715,9 +726,9 @@ const PendingCandidatesDatagrid = (props) => {
     userDetails?.height && userDetails?.weight;
 
     // convert Number( to) metres
-    heightInMetres = Number(height) / 100;
+    // heightInMetres = Number(height) / 100;
 
-    bmi = weight / Math.pow(heightInMetres, 2);
+    bmi = weight / Math.pow(height, 2);
     setUserDetails({ ...userDetails, bmi: bmi?.toString() });
 
     setBMI(bmi.toFixed(3));
@@ -731,6 +742,21 @@ const PendingCandidatesDatagrid = (props) => {
   };
 
   // END OF FUNCTION TO HANDLE CHANGE OF CANDIDATE'S PROPERTIES
+
+  // FUNCTION TO HANDLE URINALYSIS DATA CHANGE
+  const handleUrinalysisDetailsChange = (e, dataType) => {
+    setUrinalysisDetails({ ...urinalysisDetails, [dataType]: e.target.value });
+    console.log(urinalysisDetails);
+    setUserDetails({
+      ...userDetails,
+      urinalysis: JSON.stringify({
+        ...urinalysisDetails,
+        [dataType]: e.target.value,
+      }),
+    });
+    console.log(userDetails);
+  };
+  // END OF FUNCTION TO HANDLE URINALYSIS DATA CHANGE
 
   // FUNCTION TO HANDLE CHANGE OF CANDIDATE'S PROPERTIES
   const handleTestInputChange = (e, data) => {
@@ -946,6 +972,240 @@ const PendingCandidatesDatagrid = (props) => {
           </div>
         )}
         {loggedInUserRole === "Phlebotomy" && (
+          <>
+            <div className="numberOfTests h3">
+              <h3>{"Candidate's General Details"}</h3>
+            </div>
+            <div className="basicDetailsWrapper">
+              <FormControl className="genderSelect" size="small">
+                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={userDetails?.gender}
+                  label="Company name"
+                  required
+                  onChange={(e) => handleCandidatePropertyChange(e, "gender")}
+                >
+                  <MenuItem value={"M"}>M</MenuItem>
+                  <MenuItem value={"F"}>F</MenuItem>
+                </Select>
+              </FormControl>
+              <TextField
+                id="outlined-search"
+                label="Age"
+                type="string"
+                required={true}
+                size="small"
+                className="candidateName basicCandidateDetailsInput"
+                onChange={(e) => handleCandidatePropertyChange(e, "age")}
+              />
+              <TextField
+                id="outlined-search"
+                label="Temperature"
+                type="string"
+                required
+                placeholder="°C"
+                size="small"
+                className="candidateName basicCandidateDetailsInput"
+              />
+              <TextField
+                // id="outlined-search"
+                label="Weight"
+                type="string"
+                placeholder="kg"
+                className="candidateName basicCandidateDetailsInput"
+                onChange={(e) => handleCandidatePropertyChange(e, "weight")}
+                value={userDetails?.weight}
+                required
+                size="small"
+              />
+              <TextField
+                id="outlined-search"
+                label="Height"
+                type="number"
+                className="candidateName basicCandidateDetailsInput"
+                onChange={(e) => handleCandidatePropertyChange(e, "height")}
+                value={userDetails?.height}
+                required
+                placeholder="m"
+                size="small"
+              />
+              <TextField
+                id="outlined-search"
+                label="BMI"
+                type="number"
+                value={BMI}
+                className="candidateName basicCandidateDetailsInput"
+                InputLabelProps={{ shrink: true }}
+                size="small"
+              />
+              <TextField
+                id="outlined-search"
+                label="Blood Pressure"
+                type="search"
+                className="candidateName basicCandidateDetailsInput"
+                onChange={(e) =>
+                  handleCandidatePropertyChange(e, "bloodPressure")
+                }
+                required
+                size="small"
+              />
+              <TextField
+                id="outlined-search"
+                label="Visual Acuity"
+                type="search"
+                className="candidateName basicCandidateDetailsInput"
+                onChange={(e) =>
+                  handleCandidatePropertyChange(e, "visaulAcuity")
+                }
+                required
+                size="small"
+              />
+              <TextField
+                id="outlined-search"
+                label="Random Blood Sugar"
+                type="search"
+                className="candidateName basicCandidateDetailsInput"
+                onChange={(e) =>
+                  handleCandidatePropertyChange(e, "randomBloodSugar")
+                }
+                required
+                size="small"
+              />
+            </div>
+            <div className="numberOfTests h3">
+              <h3 className="urinalysisH3">
+                {"Urinalysis and Stool Analysis Details"}
+              </h3>
+              <div className="basicDetailsWrapper">
+                <TextField
+                  id="outlined-search"
+                  label="Stool Analysis"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) =>
+                    handleCandidatePropertyChange(e, "stoolAnalysis")
+                  }
+                  required
+                  size="small"
+                  placeholder="Color/Appearance"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Color/Appearance"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) =>
+                    handleUrinalysisDetailsChange(e, "Color/Appearance")
+                  }
+                  required
+                  size="small"
+                  placeholder="Color/Appearance"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Leucocytes"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) =>
+                    handleUrinalysisDetailsChange(e, "Leucocytes")
+                  }
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Nitrites"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) => handleUrinalysisDetailsChange(e, "Nitrites")}
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Urobilinogen"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) =>
+                    handleUrinalysisDetailsChange(e, "Urobilinogen")
+                  }
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Protein"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) => handleUrinalysisDetailsChange(e, "Protein")}
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="pH"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) => handleUrinalysisDetailsChange(e, "pH")}
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Blood"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) => handleUrinalysisDetailsChange(e, "Blood")}
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="SpecificGravity"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) =>
+                    handleUrinalysisDetailsChange(e, "SpecificGravity")
+                  }
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Ketone"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) => handleUrinalysisDetailsChange(e, "Ketone")}
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Bilirubin"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) =>
+                    handleUrinalysisDetailsChange(e, "Bilirubin")
+                  }
+                  required
+                  size="small"
+                />
+                <TextField
+                  id="outlined-search"
+                  label="Glucose"
+                  type="search"
+                  className="candidateName basicCandidateDetailsInput"
+                  onChange={(e) => handleUrinalysisDetailsChange(e, "Glucose")}
+                  required
+                  size="small"
+                />
+              </div>
+            </div>
+          </>
+        )}
+        {/* {loggedInUserRole === "Phlebotomy" && (
           <div className="basicDetailsWrapper">
             <FormControl className="genderSelect">
               <InputLabel id="demo-simple-select-label">Gender</InputLabel>
@@ -1014,7 +1274,7 @@ const PendingCandidatesDatagrid = (props) => {
               required
             />
           </div>
-        )}
+        )} */}
         {loggedInUserRole === "MainLab1" && (
           <>
             <div className="qualityAssuranceAccordionWrapper">
@@ -1169,14 +1429,21 @@ const PendingCandidatesDatagrid = (props) => {
         {loggedInUserRole !== "Report" && (
           <div className="bottomButtons">
             {leftBtnText && (
-              <div className=" rejectResult" onClick={(e) => handleBtnClick(e)}>
+              <button
+                className=" rejectResult"
+                onClick={(e) => handleBtnClick(e)}
+              >
                 {leftBtnText}
-              </div>
+              </button>
             )}
             {rightBtnText?.length > 0 && (
-              <div className="authorize" onClick={(e) => handleBtnClick(e)}>
+              <button
+                className="authorize"
+                disabled={disableLeftBtn}
+                onClick={(e) => handleBtnClick(e)}
+              >
                 {rightBtnText}
-              </div>
+              </button>
             )}
           </div>
         )}
@@ -1186,14 +1453,13 @@ const PendingCandidatesDatagrid = (props) => {
             <div className="bottomButtons">
               {console.log(candidateSubmittedResults)}
               {leftBtnText && (
-                <div
-                  className=" rejectResult"
+                <button
+                  className="rejectResult"
                   onClick={(e) => handleBtnClick(e)}
                 >
                   {leftBtnText}
-                </div>
+                </button>
               )}
-              {console.log(selectedCandidate)}
               {rightBtnText?.length > 0 &&
                 (rightBtnText === "Preview Report" ? (
                   <Link
@@ -1205,9 +1471,12 @@ const PendingCandidatesDatagrid = (props) => {
                     <div className="authorize">{rightBtnText}</div>
                   </Link>
                 ) : (
-                  <div className="authorize" onClick={(e) => handleBtnClick(e)}>
+                  <button
+                    className="authorize"
+                    onClick={(e) => handleBtnClick(e)}
+                  >
                     {rightBtnText}
-                  </div>
+                  </button>
                 ))}
             </div>
           )}
