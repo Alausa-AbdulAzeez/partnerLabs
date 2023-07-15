@@ -23,6 +23,12 @@ const ManageStaff = () => {
   // TOAST ID
   const toastId = React.useRef(null);
 
+  // GET CURRENT LOGGED IN USER
+  const { currentUser } = useSelector((state) => state?.user);
+
+  // LAB ID
+  const labId = currentUser?.data?.profile?.laboratory?.id;
+
   // TABLE COLUMNS
   const columns = [
     {
@@ -83,12 +89,14 @@ const ManageStaff = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      // const res = await privateRequest.get('Staff')
-      console.log("seccessS");
-      setStaff(res?.data?.data?.result);
-      setSearchedTableData(res?.data?.data?.result);
+
+      const specificLabStaff = res.data?.data?.result?.filter((candidate) => {
+        return candidate?.laboratoryId === labId;
+      });
+
+      setStaff(specificLabStaff);
+      setSearchedTableData(specificLabStaff);
       setLoading(false);
-      console.log(res?.data?.data?.result);
     } catch (error) {
       setLoading(false);
       setError(true);
