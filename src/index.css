@@ -2,7 +2,7 @@
   box-sizing: border-box;
   list-style-type: none;
   text-decoration: none;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 body {
   margin: 0;
@@ -13,6 +13,7 @@ body {
   --border-silver-color: #e6e3e3;
   --text-silver-color: #999;
   --hover-light-purple: #ece8ff;
+  --light-purple: #ece8ff;
   --main-purple: #7451f8;
 }
 

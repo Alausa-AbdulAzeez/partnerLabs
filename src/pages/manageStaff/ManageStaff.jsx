@@ -25,6 +25,7 @@ const ManageStaff = () => {
 
   // GET CURRENT LOGGED IN USER
   const { currentUser } = useSelector((state) => state?.user);
+  const userName = currentUser?.data?.profile?.fullName;
 
   // LAB ID
   const labId = currentUser?.data?.profile?.laboratory?.id;
@@ -332,7 +333,7 @@ const ManageStaff = () => {
       <div className="manageStaffWrapper">
         <Sidebar />
         <div className="manageStaffRight">
-          <Topber />
+          <Topber userName={userName} />
           {loading || error ? (
             loading ? (
               <Loading />
@@ -446,6 +447,7 @@ const ManageStaff = () => {
                       options={laboratories}
                       key={loadingStaffRole}
                       InputLabelProps={{ shrink: true }}
+                      disabled
                       getOptionLabel={(option) => `${option?.laboratoryName}`}
                       onChange={(e, option) => handleLabSelection(e, option)}
                       renderInput={(params) => (
@@ -456,6 +458,7 @@ const ManageStaff = () => {
                           placeholder={
                             selectedStaff?.laboratory?.laboratoryName
                           }
+                          disabled
                         />
                       )}
                     />
