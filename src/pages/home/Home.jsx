@@ -22,7 +22,7 @@ const Home = () => {
   const { currentUser } = useSelector((state) => state?.user);
   const loggedInUserRole = currentUser?.data?.role;
   const userName = currentUser?.data?.profile?.fullName;
-  const labId = currentUser?.data?.laboratory?.id;
+  const labId = currentUser?.data?.profile?.laboratory?.id;
 
   console.log(currentUser);
 
@@ -82,9 +82,11 @@ const Home = () => {
       console.log(res);
 
       if (res.data) {
-        const specificLabCandidates = res.data?.data?.filter(
-          (candidate) => candidate?.laboratoryId === labId
-        );
+        const specificLabCandidates = res.data?.data?.filter((candidate) => {
+          console.log(labId);
+          console.log(candidate?.laboratoryId);
+          return candidate?.laboratoryId === labId;
+        });
         console.log(specificLabCandidates);
         setTableData(
           specificLabCandidates?.length > 0
