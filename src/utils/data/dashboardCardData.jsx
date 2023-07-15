@@ -4,6 +4,54 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { RiTeamFill } from "react-icons/ri";
 import { BsFillPersonFill } from "react-icons/bs";
 
+export const adminDashboardData = [
+  {
+    title: "Candidate Search",
+    isMoney: false,
+    isCandidateSearch: true,
+    link: "candidateSearch",
+    linkText: "View Candidates",
+    backgroundColor: "#ece8ff7b",
+    icon: (
+      <AiOutlineSearch
+        className="icon"
+        style={{ color: "#7451f8", backgroundColor: "#e1dbfd" }}
+      />
+    ),
+  },
+
+  {
+    title: "Manage Staff",
+    isMoney: false,
+    isViewClients: true,
+    link: "manageStaff",
+    linkText: "View all staff",
+    backgroundColor: "#FF8C3938",
+
+    icon: (
+      <RiTeamFill
+        className="icon"
+        style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
+      />
+    ),
+  },
+  {
+    title: "Profile",
+    isMoney: true,
+    isProfile: true,
+    link: "/profile",
+    linkText: "View profile",
+    backgroundColor: "#3971ff24",
+    name: "Esther",
+
+    icon: (
+      <BsFillPersonFill
+        className="icon"
+        style={{ color: "#3970FF", backgroundColor: "#3970FF36" }}
+      />
+    ),
+  },
+];
 export const receptionistDashboardData = [
   {
     title: "Candidate Search",

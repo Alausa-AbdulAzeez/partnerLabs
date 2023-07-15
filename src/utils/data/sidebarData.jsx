@@ -1,10 +1,38 @@
 import { RxDashboard } from "react-icons/rx";
 import { React } from "react";
-import { MdCancel, MdPendingActions } from "react-icons/md";
+import { MdCancel, MdManageAccounts, MdPendingActions } from "react-icons/md";
 import { AiOutlineSearch } from "react-icons/ai";
 import { RiTeamFill } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
 
+export const adminData = [
+  {
+    ulTitle: "MAIN",
+    listItems: [
+      {
+        title: "Dashboard",
+        link: "/",
+        icon: <RxDashboard className="sidebarIcon" />,
+      },
+    ],
+  },
+  {
+    ulTitle: "LIST",
+    listItems: [
+      {
+        title: "Candidate Search",
+        link: "/candidateSearch",
+        icon: <AiOutlineSearch className="sidebarIcon" />,
+      },
+
+      {
+        title: "Manage Staff",
+        link: "/manageStaff",
+        icon: <MdManageAccounts className="sidebarIcon" />,
+      },
+    ],
+  },
+];
 export const receptionistData = [
   {
     ulTitle: "MAIN",

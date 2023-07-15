@@ -5,6 +5,7 @@ import Topber from "../../components/topbar/Topber";
 import ErrorComponent from "../../components/error/Error";
 import "./home.scss";
 import {
+  adminDashboardData,
   labScientistDashboardData,
   phlebotomistDashboardData,
   qualityAssuranceDashboardData,
@@ -21,6 +22,9 @@ const Home = () => {
   const { currentUser } = useSelector((state) => state?.user);
   const loggedInUserRole = currentUser?.data?.role;
   const userName = currentUser?.data?.profile?.fullName;
+  const labId = currentUser?.data?.laboratory?.id;
+
+  console.log(currentUser);
 
   // TABLE DATA
   const [tableData, setTableData] = useState([]);
@@ -36,7 +40,11 @@ const Home = () => {
 
   let data;
   // HANDLE CARD INFO
-  switch (loggedInUserRole && loggedInUserRole) {
+  switch (loggedInUserRole && loggedInUserRole[0]) {
+    case "SuperAdmin":
+      data = adminDashboardData;
+
+      break;
     case "Reception":
       data = receptionistDashboardData;
 
@@ -63,8 +71,6 @@ const Home = () => {
 
   // FUNCTION TO GET AND SET ALL CANDIDATES
   const getAllCandidates = async () => {
-    console.log("getting all");
-    console.log("getting all");
     try {
       setLoading(true);
       const res = await publicRequest.get("/Candidate", {
@@ -76,7 +82,15 @@ const Home = () => {
       console.log(res);
 
       if (res.data) {
-        setTableData(res.data?.data?.reverse());
+        const specificLabCandidates = res.data?.data?.filter(
+          (candidate) => candidate?.laboratoryId === labId
+        );
+        console.log(specificLabCandidates);
+        setTableData(
+          specificLabCandidates?.length > 0
+            ? specificLabCandidates.reverse()
+            : specificLabCandidates
+        );
         setLoading(false);
       } else {
         console.log(res.data);
