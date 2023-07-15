@@ -17,6 +17,7 @@ import RejectedResults from "./pages/rejectedResults/RejectedResults";
 import LabReportPage from "./pages/labReportPage/LabReportPage";
 import DownloadReportPage from "./pages/downloadReport/DownloadReportPage";
 import "react-datepicker/dist/react-datepicker.css";
+import ManageStaff from "./pages/manageStaff/ManageStaff";
 
 function App() {
   let userDetails;
@@ -59,6 +60,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/candidateSearch" element={<CandidateSearch />} />
           <Route path="/pendingCandidates" element={<PendingCandidates />} />
+          <Route path="/manageStaff" element={<ManageStaff />} />
           <Route path="/rejectedResults" element={<RejectedResults />} />
           <Route path="/viewClients" element={<ViewClients />} />
           <Route path="/reports" element={<Reports />} />
