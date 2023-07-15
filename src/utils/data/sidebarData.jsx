@@ -57,11 +57,11 @@ export const receptionistData = [
         link: "/pendingCandidates",
         icon: <MdPendingActions className="sidebarIcon" />,
       },
-      {
-        title: "View Clients",
-        link: "/viewClients",
-        icon: <RiTeamFill className="sidebarIcon" />,
-      },
+      // {
+      //   title: "View Clients",
+      //   link: "/viewClients",
+      //   icon: <RiTeamFill className="sidebarIcon" />,
+      // },
     ],
   },
 ];
@@ -89,11 +89,11 @@ export const phlebotomistData = [
         link: "/pendingCandidates",
         icon: <MdPendingActions className="sidebarIcon" />,
       },
-      {
-        title: "View Clients",
-        link: "/viewClients",
-        icon: <RiTeamFill className="sidebarIcon" />,
-      },
+      // {
+      //   title: "View Clients",
+      //   link: "/viewClients",
+      //   icon: <RiTeamFill className="sidebarIcon" />,
+      // },
     ],
   },
 ];
@@ -160,11 +160,11 @@ export const qualityAssuranceData = [
         icon: <MdPendingActions className="sidebarIcon" />,
       },
 
-      {
-        title: "View Clients",
-        link: "/viewClients",
-        icon: <RiTeamFill className="sidebarIcon" />,
-      },
+      // {
+      //   title: "View Clients",
+      //   link: "/viewClients",
+      //   icon: <RiTeamFill className="sidebarIcon" />,
+      // },
       {
         title: "Reports",
         link: "/reports",
@@ -197,11 +197,11 @@ export const reportOfficerData = [
         link: "/pendingCandidates",
         icon: <MdPendingActions className="sidebarIcon" />,
       },
-      {
-        title: "View Clients",
-        link: "/viewClients",
-        icon: <RiTeamFill className="sidebarIcon" />,
-      },
+      // {
+      //   title: "View Clients",
+      //   link: "/viewClients",
+      //   icon: <RiTeamFill className="sidebarIcon" />,
+      // },
       {
         title: "Reports",
         link: "/reports",

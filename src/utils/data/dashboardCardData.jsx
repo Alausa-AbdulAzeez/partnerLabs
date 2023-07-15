@@ -82,21 +82,21 @@ export const receptionistDashboardData = [
       />
     ),
   },
-  {
-    title: "View Clients",
-    isMoney: false,
-    isViewClients: true,
-    link: "viewClients",
-    linkText: "View all clients",
-    backgroundColor: "#FF8C3938",
+  // {
+  //   title: "View Clients",
+  //   isMoney: false,
+  //   isViewClients: true,
+  //   link: "viewClients",
+  //   linkText: "View all clients",
+  //   backgroundColor: "#FF8C3938",
 
-    icon: (
-      <RiTeamFill
-        className="icon"
-        style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
-      />
-    ),
-  },
+  //   icon: (
+  //     <RiTeamFill
+  //       className="icon"
+  //       style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
+  //     />
+  //   ),
+  // },
   {
     title: "Profile",
     isMoney: true,
@@ -144,21 +144,21 @@ export const phlebotomistDashboardData = [
       />
     ),
   },
-  {
-    title: "View Clients",
-    isMoney: false,
-    isViewClients: true,
-    link: "viewClients",
-    linkText: "View all clients",
-    backgroundColor: "#FF8C3938",
+  // {
+  //   title: "View Clients",
+  //   isMoney: false,
+  //   isViewClients: true,
+  //   link: "viewClients",
+  //   linkText: "View all clients",
+  //   backgroundColor: "#FF8C3938",
 
-    icon: (
-      <RiTeamFill
-        className="icon"
-        style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
-      />
-    ),
-  },
+  //   icon: (
+  //     <RiTeamFill
+  //       className="icon"
+  //       style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
+  //     />
+  //   ),
+  // },
   {
     title: "Profile",
     isMoney: true,
@@ -255,21 +255,21 @@ export const qualityAssuranceDashboardData = [
       />
     ),
   },
-  {
-    title: "View Clients",
-    isMoney: false,
-    link: "viewClients",
-    isViewClients: true,
-    linkText: "View all clients",
-    backgroundColor: "#FF8C3938",
+  // {
+  //   title: "View Clients",
+  //   isMoney: false,
+  //   link: "viewClients",
+  //   isViewClients: true,
+  //   linkText: "View all clients",
+  //   backgroundColor: "#FF8C3938",
 
-    icon: (
-      <RiTeamFill
-        className="icon"
-        style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
-      />
-    ),
-  },
+  //   icon: (
+  //     <RiTeamFill
+  //       className="icon"
+  //       style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
+  //     />
+  //   ),
+  // },
   {
     title: "Profile",
     isMoney: true,
@@ -303,21 +303,21 @@ export const reportOfficerDashboardData = [
       />
     ),
   },
-  {
-    title: "View Clients",
-    isMoney: false,
-    link: "viewClients",
+  // {
+  //   title: "View Clients",
+  //   isMoney: false,
+  //   link: "viewClients",
 
-    linkText: "View all clients",
-    backgroundColor: "#FF8C3938",
+  //   linkText: "View all clients",
+  //   backgroundColor: "#FF8C3938",
 
-    icon: (
-      <RiTeamFill
-        className="icon"
-        style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
-      />
-    ),
-  },
+  //   icon: (
+  //     <RiTeamFill
+  //       className="icon"
+  //       style={{ color: "#FF8C39", backgroundColor: "#ff8c394f" }}
+  //     />
+  //   ),
+  // },
   {
     title: "Profile",
     isMoney: true,
