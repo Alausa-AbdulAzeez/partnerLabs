@@ -83,11 +83,8 @@ const Home = () => {
 
       if (res.data) {
         const specificLabCandidates = res.data?.data?.filter((candidate) => {
-          console.log(labId);
-          console.log(candidate?.laboratoryId);
           return candidate?.laboratoryId === labId;
         });
-        console.log(specificLabCandidates);
         setTableData(
           specificLabCandidates?.length > 0
             ? specificLabCandidates.reverse()

@@ -9,6 +9,57 @@
     .candidateSearchMainWrapper {
       padding: 30px 64px;
 
+            .filterContainer {
+                height: 80px;
+                width: 800px;
+                margin-bottom: 40px;
+                display: flex;
+                align-items: center;
+                padding: 0 50px;
+                border-radius: 50px;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            
+                .candidateSearchName {
+                  margin: 0px 12px;
+                }
+            
+                .filterDateWrapper {
+                  .filterDate {
+                    padding: 8px;
+                    border: 1px solid silver;
+                    width: 100px;
+                  }
+                }
+            
+                .searchFilterBtn {
+                  height: 36px;
+                  // border-radius: 16px;
+                  background-color: var(--main-purple);
+                  color: #fff;
+                  padding: 6px 12px;
+                  display: flex;
+                  align-items: center;
+                  outline: none;
+                  border: none;
+                  cursor: pointer;
+                  margin-left: 12px;
+                }
+            
+                .resetBtn {
+                  height: 36px;
+                  // border-radius: 16px;
+                  background-color: #000;
+                  color: #fff;
+                  padding: 6px 12px;
+                  display: flex;
+                  align-items: center;
+                  outline: none;
+                  border: none;
+                  cursor: pointer;
+                  margin-left: 36px;
+                }
+              }
+
       .candidateSearchMainTopForm {
         display: flex;
         align-items: center;
