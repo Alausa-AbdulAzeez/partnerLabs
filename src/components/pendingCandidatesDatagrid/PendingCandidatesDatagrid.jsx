@@ -101,7 +101,7 @@ const PendingCandidatesDatagrid = (props) => {
   let rightBtnText;
 
   // LOGGED IN USER RLOE
-  const loggedInUserRole = props.userDetails?.data?.role;
+  const loggedInUserRole = props.userDetails?.data?.role[0];
 
   // LOGGED IN USER
   const userName = props.userDetails?.data?.profile?.fullName;
@@ -207,6 +207,8 @@ const PendingCandidatesDatagrid = (props) => {
       break;
 
     default:
+      rows = [];
+      columns = defaultColumns;
       break;
   }
 
