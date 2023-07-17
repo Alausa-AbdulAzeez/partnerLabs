@@ -112,6 +112,7 @@ const RejectedResults = () => {
                   type='search'
                   className='candidateName'
                   onChange={(e) => handleSearchParamsChange(e)}
+                  size='small'
                 />
 
                 {/* <div className='rejectedResultsBtn'>Search</div> */}

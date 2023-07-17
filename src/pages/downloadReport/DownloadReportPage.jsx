@@ -51,14 +51,14 @@ const DownloadReportPage = () => {
     {
       field: 'testName',
       headerName: 'Test name',
-      width: 350,
+      width: 300,
       headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'result',
       headerName: 'Result',
-      width: 350,
+      width: 300,
       headerAlign: 'center',
       align: 'center',
     },
@@ -106,7 +106,7 @@ const DownloadReportPage = () => {
   }, [])
 
   return (
-    <div className='downloadReportPageContainer' id='report'>
+    <div className='downloadReportPageContainer'>
       <div onClick={() => window.print()} className='downloadBtn'>
         Download
         <span>
@@ -151,7 +151,7 @@ const DownloadReportPage = () => {
           <div className='parametersInvestigatedTitle'>LABORATORY TESTS</div>
           <Box
             height={Math.round((candidateResultDetails.length + 1) * 55)}
-            width={800}
+            width={650}
           >
             <DataGrid
               style={{ textAlign: 'center' }}

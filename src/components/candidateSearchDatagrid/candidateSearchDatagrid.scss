@@ -77,6 +77,9 @@
         flex: 1;
       }
     }
+    .basicDetailsWrapperBottom {
+      margin-bottom: 40px;
+    }
     .qualityAssuranceAccordionWrapper {
       margin-top: 20px;
     }
@@ -97,10 +100,9 @@
         border: none;
         outline: none;
 
-        &:disabled{
+        &:disabled {
           cursor: not-allowed;
           background-color: rgba(207, 221, 255, 0.336);
-
         }
         // margin-left: auto;
       }
