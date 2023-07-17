@@ -17,6 +17,7 @@ const AddStaff = () => {
 
   // GET CURRENT LOGGED IN USER
   const { currentUser } = useSelector((state) => state?.user);
+  const userName = currentUser?.data?.profile?.fullName;
 
   // LAB ID
   const labId = currentUser?.data?.profile?.laboratory?.id;
@@ -206,7 +207,7 @@ const AddStaff = () => {
         />
         <Sidebar />
         <div className="addStaffRight">
-          <Topber />
+          <Topber userName={userName} />
           <div className="addStaffMainWrapper">
             <h2> Add New Staff</h2>
             <form
