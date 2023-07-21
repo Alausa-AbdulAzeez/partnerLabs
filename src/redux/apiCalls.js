@@ -20,8 +20,9 @@ export const login = async (
   try {
     const res = await publicRequest.post("/Account/login", user).then((res) => {
       if (
-        res?.data?.data?.role === "SuperAdmin" ||
-        res?.data?.data?.role === "client"
+        res?.data?.data?.role?.[0] === "SuperAdmin" ||
+        res?.data?.data?.role?.[0] === "client" ||
+        res?.data?.data?.profile?.laboratory?.type !== "PartnerLab"
       ) {
         throw new Error("Can not access this resource");
       } else {
